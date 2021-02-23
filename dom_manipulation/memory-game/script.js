@@ -58,36 +58,38 @@ function createDivsForColors(colorArray) {
 }
 const clickedCard = [];
 let counter = 0;
+let noClicking = false;
 // TODO: Implement this function!
 function handleCardClick(event) {
-  const target = event.target;
-  target.style.backgroundColor = target.classList.value;
+  if (noClicking) return;
+  const currentCard = event.target;
+  currentCard.style.backgroundColor = currentCard.classList.value;
   counter++;
-  clickedCard.push(target)
+  clickedCard.push(currentCard)
   console.log(counter)
   // validates the card
   if (counter === 2) {
-    validateCard(target)
-  }
-  if (counter > 2) {
-    alert("You cannot select more than two cards!")
+    validateCard(currentCard)
+    noClicking = true;
   }
 }
 
-const validateCard = (target) => {
-  if ( target.classList.value !== clickedCard[0].classList.value) {
+const validateCard = (currentCard) => {
+  if ( currentCard.classList.value !== clickedCard[0].classList.value) {
     setTimeout(function() {
       clickedCard.forEach(element => {
         element.style.backgroundColor = 'white';
       })
       clickedCard.length = 0;
       counter = 0;
+      noClicking = false;
     },1000);
     
   }
   else {
     counter = 0;
     clickedCard.length = 0;
+    noClicking = false;
   }
 };
 
