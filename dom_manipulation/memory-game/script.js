@@ -69,8 +69,8 @@ function handleCardClick(event) {
   console.log(counter)
   // validates the card
   if (counter === 2) {
-    validateCard(currentCard)
     noClicking = true;
+    validateCard(currentCard)
   }
 }
 
@@ -78,7 +78,7 @@ const validateCard = (currentCard) => {
   if ( currentCard.classList.value !== clickedCard[0].classList.value) {
     setTimeout(function() {
       clickedCard.forEach(element => {
-        element.style.backgroundColor = 'white';
+        element.style.backgroundColor = '';
       })
       clickedCard.length = 0;
       counter = 0;
