@@ -1,6 +1,9 @@
 :root {
+  --primary-color: #ffd54f;
+  --secondary-color: #455a64;
   --main-font: "Poppins", sans-serif;
   --meme-font: "Impact", sans-serif;
+  --meme-color: white;
 }
 body {
   margin: 0;
@@ -15,7 +18,7 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ffd54f;
+  background-color: var(--primary-color);
   font-family: var(--main-font);
 }
 
@@ -45,16 +48,18 @@ input {
 }
 
 label {
-  color: #455a64;
+  color: var(--secondary-color);
+  width: 200px;
+  font-weight: bolder;
 }
 
 .form__imgURL,
 .form__text__top,
 .form__text__bottom {
-  width: 80%;
-  background-color: #ffd54f;
+  width: 100%;
+  background-color: var(--primary-color);
   border-style: none;
-  border-bottom: 1px solid #455a64;
+  border-bottom: 1px solid var(--secondary-color);
 }
 
 .form__imgURL:focus,
@@ -62,6 +67,12 @@ label {
 .form__text__bottom:focus {
   outline: none;
   color: #455a64;
+}
+
+.form__imgURL:active,
+.form__text__top:active,
+.form__text__bottom:active {
+  background-color: var(--primary-color);
 }
 
 .form__submit__button {
@@ -72,31 +83,29 @@ label {
   box-shadow: 0 5px 5px -3px #00000033;
   background-color: #1c313a;
   color: white;
-  /* bottom: 30px; */
-}
-
-.section {
-  width: 80%;
-  margin: auto;
 }
 
 .img__container {
-  margin: auto;
+  margin: 0 auto;
   width: fit-content;
   height: fit-content;
   position: relative;
   top: 50px;
-  left: 30px;
 }
 
+.img__url {
+  width: 60vw;
+}
 .img__text__top {
   position: absolute;
   top: 6px;
   left: 50%;
   transform: translateX(-50%);
+  width: fit-content;
+  text-align: center;
   font-family: var(--meme-font);
-  font-size: 2rem;
-  color: white;
+  font-size: 5vw;
+  color: var(--meme-color);
   text-shadow: 0 0 3px #000000, 0 0 5px #000000;
 }
 .img__text__bottom {
@@ -104,9 +113,10 @@ label {
   bottom: 6px;
   right: 50%;
   transform: translateX(50%);
+  width: fit-content;
   font-family: var(--meme-font);
-  font-size: 2rem;
-  color: white;
+  font-size: 5vw;
+  color: var(--meme-color);
   text-shadow: 0 0 3px #000000, 0 0 5px #000000;
 }
 
@@ -115,7 +125,7 @@ label {
   width: 100%;
   height: 100%;
   left: 0;
-  font-size: 5em;
+  font-size: 20vw;
   background-color: transparent;
   color: transparent;
   border-style: none;
@@ -128,4 +138,34 @@ label {
 
 .img__delete:focus {
   outline: none;
+}
+
+@media screen and (max-width: 1100px) {
+  .form__container {
+    width: 6;
+    flex-direction: column;
+  }
+
+  .form__imgURL,
+  .form__text__top,
+  .form__text__bottom {
+    padding-top: 5px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .title {
+    text-align: center;
+    width: 80vw;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .title {
+    font-size: 60px;
+  }
+
+  .description {
+    font-size: 20px;
+  }
 }
