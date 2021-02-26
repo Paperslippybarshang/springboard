@@ -17,8 +17,6 @@ const onAdd = () => {
     inputTxtBottom.focus();
     return;
   }
-
-  console.log()
   // 2. Create Image item
   const meme = createMeme(imgURL, textTop, textBottom);
   // // 3. append the item to the container
