@@ -19,7 +19,7 @@ const onAdd = () => {
   }
   // 2. Create Image item
   const meme = createMeme(imgURL, textTop, textBottom);
-  // // 3. append the item to the container
+  // 3. append the item to the container
   memeContainer.append(meme);
   // 4. Reset the item
 
