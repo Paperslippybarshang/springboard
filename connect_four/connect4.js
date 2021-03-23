@@ -61,6 +61,7 @@ const makeHtmlBoard = () => {
 
 const findSpotForCol = (x) => {
   // TODO: write the real version of this, rather than always returning 0
+
   return 0;
 }
 
@@ -85,8 +86,7 @@ const endGame = (msg) => {
 
 const handleClick = (evt) => {
   // get x from ID of clicked cell
-  var x = +evt.target.id;
-
+  const x = +evt.target.id;
   // get next spot in column (if none, ignore click)
   var y = findSpotForCol(x);
   if (y === null) {
@@ -107,6 +107,7 @@ const handleClick = (evt) => {
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
+  currPlayer = currPlayer === 1 ? 2 : 1;
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
