@@ -64,11 +64,10 @@ const findSpotForCol = (x) => {
   // Return the index of next available spot in the board, based on the number of empty rows in column x.
   const availableSpotIndex = board.filter(row => !row[x]).length-1
   if (availableSpotIndex > -1) {
-    board[availableSpotIndex][x] = `${availableSpotIndex}-${x}`
+    board[availableSpotIndex][x] = currPlayer
     return availableSpotIndex
-  } else {
-    return null
-  };
+  }
+  return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -118,8 +117,8 @@ const handleClick = (evt) => {
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
-const checkForWin = () => {
-  function _win(cells) {
+function checkForWin() {
+  const _win = (cells) => {
     // Check four cells to see if they're all color of current player
     //  - cells: list of four (y, x) cells
     //  - returns true if all are legal coordinates & all match currPlayer
@@ -136,12 +135,12 @@ const checkForWin = () => {
 
   // TODO: read and understand this code. Add comments to help you.
 
-  for (var y = 0; y < HEIGHT; y++) {
-    for (var x = 0; x < WIDTH; x++) {
-      var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-      var vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
-      var diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
-      var diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
+  for (let y = 0; y < HEIGHT; y++) {
+    for (let x = 0; x < WIDTH; x++) {
+      const horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
+      const vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
+      const diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
+      const diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
 
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;
