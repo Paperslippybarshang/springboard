@@ -86,6 +86,7 @@ const placeInTable = (y, x) => {
 
 const endGame = (msg) => {
   // TODO: pop up alert message
+  window.alert(msg)
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -108,7 +109,8 @@ const handleClick = (evt) => {
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
-
+  const isFilled = board.map(row => new Set(row).has(null))
+  isFilled.every(cell => cell === false) ? endGame(`It's a draw!`) : '';
   // switch players
   // TODO: switch currPlayer 1 <-> 2
   currPlayer = currPlayer === 1 ? 2 : 1;
