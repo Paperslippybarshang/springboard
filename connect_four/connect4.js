@@ -61,11 +61,11 @@ const makeHtmlBoard = () => {
 
 const findSpotForCol = (x) => {
   // TODO: write the real version of this, rather than always returning 0
-  // Return the index of next available spot in the board, based on the number of empty rows in column x.
-  const availableSpotIndex = board.filter(row => !row[x]).length-1
-  if (availableSpotIndex > -1) {
-    board[availableSpotIndex][x] = currPlayer
-    return availableSpotIndex
+  // Return the index of next available spot (y) in the board, based on the number of empty rows in column x.
+  const y = board.filter(row => !row[x]).length-1
+  if (y > -1) {
+    board[y][x] = currPlayer
+    return y
   }
   return null;
 }
