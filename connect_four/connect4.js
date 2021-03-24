@@ -61,8 +61,14 @@ const makeHtmlBoard = () => {
 
 const findSpotForCol = (x) => {
   // TODO: write the real version of this, rather than always returning 0
-
-  return 0;
+  // Return the index of next available spot in the board, based on the number of empty rows in column x.
+  const availableSpotIndex = board.filter(row => !row[x]).length-1
+  if (availableSpotIndex > -1) {
+    board[availableSpotIndex][x] = `${availableSpotIndex}-${x}`
+    return availableSpotIndex
+  } else {
+    return null
+  };
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -73,7 +79,7 @@ const placeInTable = (y, x) => {
   const tableCell = document.getElementById(`${y}-${x}`);
   piece.setAttribute("class", `piece p${currPlayer}`)
   tableCell.append(piece);
-  console.log(tableCell)
+
 }
 
 /** endGame: announce game end */
@@ -88,10 +94,8 @@ const handleClick = (evt) => {
   // get x from ID of clicked cell
   const x = +evt.target.id;
   // get next spot in column (if none, ignore click)
-  var y = findSpotForCol(x);
-  if (y === null) {
-    return;
-  }
+  const y = findSpotForCol(x);
+  if (y === null) return;
 
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
