@@ -5,8 +5,8 @@
  * board fills (tie)
  */
 
-let WIDTH = 7;
-let HEIGHT = 6;
+const WIDTH = 7;
+const HEIGHT = 6;
 
 let currPlayer = 1; // active player: 1 or 2
 const board = []; // array of rows, each row is array of cells  (board[y][x])
@@ -18,7 +18,7 @@ const board = []; // array of rows, each row is array of cells  (board[y][x])
 const makeBoard = () => {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
   for (let x = 0; x < HEIGHT; x++) {
-    const emptyRow = new Array(WIDTH).fill(null);
+    const emptyRow = new Array(WIDTH).fill(null); // NICE JOB OF using new Array method, instead of using for loop. 
     board.push(emptyRow);
   }
 }
@@ -62,13 +62,25 @@ const makeHtmlBoard = () => {
 const findSpotForCol = (x) => {
   // TODO: write the real version of this, rather than always returning 0
   // Return the index of next available spot (y) in the board, based on the number of empty rows in column x.
-  const y = board.filter(row => !row[x]).length-1
+  // If there's one piece inserted in a column  result => [null, null, null, null, null, null],length-1 = 5
+  const y = board.filter(row => !row[x]).length-1 // GOOD JOB! This code shows creativity. Nicely put. 
   if (y > -1) {
-    board[y][x] = currPlayer
     return y
   }
   return null;
 }
+
+// const board = [
+
+//       0  |  1  |  2  |   3  |  4  |  5  |  6
+// 0  [ null, null, null, null, null, null, null ],
+// 1  [ null, null, null, null, null, null, null ],
+// 2  [ null, null, null, null, null, null, null ],
+// 3  [ null, null, null, null, null, null, null ],
+// 4  [ null, null, null, null, null, null, null ],
+// 5  [ null, null, null, null, null, null, null ]
+
+// ];
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
@@ -85,7 +97,8 @@ const placeInTable = (y, x) => {
 
 const endGame = (msg) => {
   // TODO: pop up alert message
-  window.alert(msg)
+  window.alert(msg);
+  
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -99,6 +112,7 @@ const handleClick = (evt) => {
 
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
+  board[y][x] = currPlayer;
   placeInTable(y, x);
 
   // check for win
@@ -108,8 +122,9 @@ const handleClick = (evt) => {
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
-  const isFilled = board.map(row => new Set(row).has(null))
-  isFilled.every(cell => cell === false) ? endGame(`It's a draw!`) : '';
+  // const isFilled = board.map(row => new Set(row).has(null)) // returns an array => [false, false, false, false, false, false] when all boards are filled.
+  // isFilled.every(cell => cell === false) ? endGame(`It's a draw!`) : '';
+  board.every(row => row.every(cell => cell)) ? endGame(`It's a draw!`) : '';
   // switch players
   // TODO: switch currPlayer 1 <-> 2
   currPlayer = currPlayer === 1 ? 2 : 1;
@@ -125,6 +140,7 @@ function checkForWin() {
 
     return cells.every(
       ([y, x]) =>
+      // Do we need these check? why removing these conditional logic causes the board to return only player 1?
         y >= 0 &&
         y < HEIGHT &&
         x >= 0 &&
